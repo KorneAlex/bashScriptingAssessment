@@ -12,7 +12,8 @@ do
         if [[ "$id" = ":c" ]] ;
         then 
         exit 0
-        elif ! [ -z "${id}" ] && [[ $id =~ $re ]] && [ -z `awk -v y=$id 'match($1, /y/)' $1` ]
+        # elif `awk 'match($1,/^33$/)' $1 | awk '{print $1}'`
+        elif ! [ -z "${id}" ] && [[ $id =~ $re ]] && ! [ "$id" = "`awk 'match($1, '$id')' $1`" ] ;
         then
             count=$((count+1))
         else 
@@ -22,7 +23,10 @@ do
     then
         echo -n "Please enter the name or ":c" to cancel: "
         read name
-        if ! [ -z "${name}" ]
+        if [[ "$name" = ":c" ]] ;
+        then 
+        exit 0
+        elif ! [ -z "${name}" ]
         then
             count=$((count+1))
         else 
@@ -32,7 +36,10 @@ do
     then
         echo -n "Please enter the occupation or ":c" to cancel: "
         read occupation
-        if ! [ -z "${occupation}" ]
+        if [[ "$occupation" = ":c" ]] ;
+        then 
+        exit 0
+        elif ! [ -z "${occupation}" ]
         then
             count=$((count+1))
         else 
@@ -42,7 +49,10 @@ do
     then
         echo -n "Please enter the departament or ":c" to cancel: "
         read departament
-        if ! [ -z "${departament}" ]
+        if [[ "$departament" = ":c" ]] ;
+        then 
+        exit 0
+        elif ! [ -z "${departament}" ]
         then
             count=$((count+1))
         else 
@@ -51,7 +61,10 @@ do
     else
         echo -n "Please enter the wages or ":c" to cancel: "
         read wages
-        if ! [ -z "${wages}" ] && [[ $wages =~ $re2 ]]
+        if [[ "$wages" = ":c" ]] ;
+        then 
+        exit 0
+        elif ! [ -z "${wages}" ] && [[ $wages =~ $re2 ]]
         then
             count=$((count+1))
         else 
@@ -100,3 +113,5 @@ read answer
     ;;
     esac
 done
+
+# TODO fix user input (spaces)

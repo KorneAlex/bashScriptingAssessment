@@ -9,7 +9,8 @@ case $2 in
         #read id
         id=$3
         foundLineNumber=`awk '{print $1}' $1 | grep -n ^$id$ | awk -F: '{print $1}'`
-        ! [ -z $foundLineNumber ] && sed -n "$foundLineNumber p" $1 || exit 1
+        ! [ -z $foundLineNumber ] && echo $foundLineNumber || exit 1
+        # ! [ -z $foundLineNumber ] && sed -n "$foundLineNumber p" $1 || exit 1
     ;;
 
     # by name

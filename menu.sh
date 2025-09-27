@@ -41,8 +41,8 @@ do
     ;;
 
     5)
-        ./find_record.sh $1 id
-                echo $?
+        echo `./find_record.sh $1 id "43435345"`
+                # echo $?
     ;;
 
     0)
