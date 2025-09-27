@@ -1,21 +1,26 @@
 #!/bin/bash
 
 count=0
-while [ $count -lt 4 ]
+re='^[0-9]+$'
+re2='^[0-9]+([.][0-9]+)?$'
+while [ $count -lt 5 ]
 do 
     if [ $count -eq 0 ]
     then
-        echo -n "Please enter the id: "
+        echo -n "Please enter the id or ":c" to cancel: "
         read id
-        if ! [ -z "${id}" ]
+        if [[ "$id" = ":c" ]] ;
+        then 
+        exit 0
+        elif ! [ -z "${id}" ] && [[ $id =~ $re ]] && [ -z `awk -v y=$id 'match($1, /y/)' $1` ]
         then
             count=$((count+1))
         else 
-            echo "Warning: Id cannot be blank"
+            echo "Warning: This id is already exist or input is invalid. Please enter a number"
         fi
     elif [ $count -eq 1 ]
     then
-        echo -n "Please enter the name: "
+        echo -n "Please enter the name or ":c" to cancel: "
         read name
         if ! [ -z "${name}" ]
         then
@@ -25,7 +30,7 @@ do
         fi
     elif [ $count -eq 2 ]
     then
-        echo -n "Please enter the occupation: "
+        echo -n "Please enter the occupation or ":c" to cancel: "
         read occupation
         if ! [ -z "${occupation}" ]
         then
@@ -35,7 +40,7 @@ do
         fi
     elif [ $count -eq 3 ]
     then
-        echo -n "Please enter the departament: "
+        echo -n "Please enter the departament or ":c" to cancel: "
         read departament
         if ! [ -z "${departament}" ]
         then
@@ -44,19 +49,19 @@ do
             echo "Warning: Departament cannot be blank"
         fi
     else
-        echo -n "Please enter the wages: "
+        echo -n "Please enter the wages or ":c" to cancel: "
         read wages
-        if ! [ -z "${wages}" ]
+        if ! [ -z "${wages}" ] && [[ $wages =~ $re2 ]]
         then
             count=$((count+1))
         else 
-            echo "Warning: Wages cannot be blank"
+            echo "Warning: Wages should be a number"
         fi
     fi
 done
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Do you want to add this record(Y/n)?:"
-echo "--> "$id" "$name" "$occupation" "$departament" "$wages" <--"
+echo "--> "$id" "$name" "$occupation" "$departament" €"$wages" <--"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -n ":: "
 exit_a=0
@@ -65,7 +70,7 @@ do
 read answer
     case $answer in
         [yY] | [yY][eE][sS] | "")
-            echo $id" "$name" "$occupation" "$departament" "$wages >> $1
+            echo $id" "$name" "$occupation" "$departament" €"$wages >> $1
             echo "***the record has been successfully saved***"
             exit_a=1
             ;;
