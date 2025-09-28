@@ -28,6 +28,7 @@ do
         exit 0
         elif ! [ -z "${name}" ]
         then
+            name=`echo $name | sed 's/ /_/'` 
             count=$((count+1))
         else 
             echo "Warning: Name cannot be blank"
@@ -41,6 +42,7 @@ do
         exit 0
         elif ! [ -z "${occupation}" ]
         then
+            occupation=`echo $occupation | sed 's/ /_/'` 
             count=$((count+1))
         else 
             echo "Warning: Occupation cannot be blank"
@@ -54,6 +56,7 @@ do
         exit 0
         elif ! [ -z "${departament}" ]
         then
+            departament=`echo $departament | sed 's/ /_/'` 
             count=$((count+1))
         else 
             echo "Warning: Departament cannot be blank"
