@@ -2,18 +2,29 @@
 
 count=0
 re='^[0-9]+$'
+id_check='^[0-9]{5}+$'
 re2='^[0-9]+([.][0-9]+)?$'
+abc_check='^[A-Za-z]+([[:space:]][A-Za-z]+)*$'
+        clear
+        echo "==============================================================================="
+        echo "||                          Enter new record menu                            ||"
+        echo "==============================================================================="
+        echo "||  To cancel at any moment, please type :c                                  ||"
+        echo "||  All spaces will be replaced with \"_\"                                     ||"
+        echo "==============================================================================="
+        echo ""
+
 while [ $count -lt 5 ]
 do 
     if [ $count -eq 0 ]
     then
-        echo -n "Please enter the id or ":c" to cancel: "
+        echo -n "Please enter the id (5 digit number): "
         read id
         if [[ "$id" = ":c" ]] ;
         then 
         exit 0
         # elif `awk 'match($1,/^33$/)' $1 | awk '{print $1}'`
-        elif ! [ -z "${id}" ] && [[ $id =~ $re ]] && ! [ "$id" = "`awk 'match($1, '$id')' $1`" ] ;
+        elif ! [ -z "${id}" ] && [[ $id =~ $id_check ]] && ! [ -n "`awk 'match($1, '$id')' $1`" ] ; # tried everythig until it worked
         then
             count=$((count+1))
         else 
@@ -21,48 +32,48 @@ do
         fi
     elif [ $count -eq 1 ]
     then
-        echo -n "Please enter the name or ":c" to cancel: "
+        echo -n "Please enter the employees' full name: "
         read name
         if [[ "$name" = ":c" ]] ;
         then 
         exit 0
-        elif ! [ -z "${name}" ]
+        elif ! [ -z "${name}" ] && [[ $name =~ $abc_check ]] ;
         then
-            name=`echo $name | sed 's/ /_/'` 
+            name=`echo $name | sed 's/ /_/g'`  # replace ALL spaces with "_"
             count=$((count+1))
         else 
-            echo "Warning: Name cannot be blank"
+            echo "Error! Warning: Name cannot be blank and must consist of letters a-z"
         fi
     elif [ $count -eq 2 ]
     then
-        echo -n "Please enter the occupation or ":c" to cancel: "
+        echo -n "Please enter the occupation: "
         read occupation
         if [[ "$occupation" = ":c" ]] ;
         then 
         exit 0
         elif ! [ -z "${occupation}" ]
         then
-            occupation=`echo $occupation | sed 's/ /_/'` 
+            occupation=`echo $occupation | sed 's/ /_/g'` 
             count=$((count+1))
         else 
             echo "Warning: Occupation cannot be blank"
         fi
     elif [ $count -eq 3 ]
     then
-        echo -n "Please enter the departament or ":c" to cancel: "
+        echo -n "Please enter the departament: "
         read departament
         if [[ "$departament" = ":c" ]] ;
         then 
         exit 0
         elif ! [ -z "${departament}" ]
         then
-            departament=`echo $departament | sed 's/ /_/'` 
+            departament=`echo $departament | sed 's/ /_/g'` 
             count=$((count+1))
         else 
             echo "Warning: Departament cannot be blank"
         fi
     else
-        echo -n "Please enter the wages or ":c" to cancel: "
+        echo -n "Please enter the wages (amount in euro): "
         read wages
         if [[ "$wages" = ":c" ]] ;
         then 

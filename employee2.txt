@@ -1,9 +1,8 @@
-300 frank  manager sales €5000
-400 caroline developer technology €5500
-100 mary sysadmin technology €7000
-200 Rosanne manager marketing €9500
-500 eamonn dba technology €6000
-600 colm sysadmin technology €4500
-123 Alex_Korne 22 22 €22
-23232 wadd awdawd awd €23
-2332 Alex 323 22 €23
+30045 frank  manager sales €5000
+40034 caroline developer technology €5500
+10023 mary sysadmin technology €7000
+20012 Rosanne manager marketing €9500
+50056 eamonn dba technology €6000
+60045 colm sysadmin technology €4500
+12334 Alex_Korne 22 22 €22
+23323 Alex 323 22 €23
