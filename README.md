@@ -1,4 +1,4 @@
-Author: Oleksandr Korniienko
+Author: Oleksandr Korniienko 20114792
 Assessment 1 Computer Systems SETU 2025
 
 This little programm takes a file with space-separated fields: id, name, ocupation, departament wages as the first parameter. 

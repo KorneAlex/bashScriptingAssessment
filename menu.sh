@@ -1,22 +1,8 @@
 #!/bin/bash
 
-# Author: Oleksandr Korniienko
-# Assessment 1 Computer Systems SETU 2025
-
-# This little programm takes a file with space-separated fields: id, name, ocupation, departament wages as the first parameter. 
-# If file doesn't exist it will be created automatically. If the first parameter not entered it will look for the employees.txt or create it
-# The user can add, delete and see the list in the table format 
-# if any field has the space it's replaced with the underscore "_"
-
-
-# Here was my attempt to make it in one line:
-# [[ -f $1 ]] && file=$1 || 
-# (( [[ ! ("$1" = "employee.txt") && ! (-f $1) ]] && echo "creating " $1; touch $1;) || 
-# (echo "No parameters entered. Checking if the employee.txt exist"; [[ -f employee.txt ]] && echo "The employee.txt exist. Opening..."; file=employee.txt || echo "The file doesn't exist. Creating a new employee.txt"; touch employee.txt; file=employee.txt))
-
 if ! [[ -z $1 ]] ;
 then
-echo "parameter entered"
+#echo "parameter entered"
     if ! [[ -f $1 ]] ; 
     then
         echo "creating " $1; 
@@ -42,12 +28,14 @@ do
     echo "==============================================================================="
     echo "||                                     Menu                                  ||"
     echo "==============================================================================="
+    echo "||                                                                           ||"
     echo "|| 1. List all records                                                       ||"
     echo "|| 2. Create new record                                                      ||"
     echo "|| 3. Edit record                                                            ||"
     echo "|| 4. Delete record                                                          ||"
     echo "|| 5. Find record by ...                                                     ||"
     echo "|| 0. Exit                                                                   ||"
+    echo "||                                                                           ||"
     echo "==============================================================================="
     echo -n ":: "
     read option
@@ -64,8 +52,7 @@ do
 
     3)
         clear
-        echo "The feature is in development"
-        #./edit_record.sh $file
+        ./edit_record.sh $file
     ;;
 
     4)
