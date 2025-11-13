@@ -27,7 +27,7 @@ do
             elif [[ $answer =~ $id_check && `grep $answer $1` ]] ; 
                 then
                 foundLineNumber=`./find_record.sh $1 line_number $answer`
-                echo "Do you want to edit this record(y/N)?"
+                echo "Do you want to edit this record(Y/n)?"
                 echo ""
                 sed -n "$foundLineNumber p" $1  | 
                             awk 'BEGIN  {printf "%s %-5s %3s %-20s %3s %-10s %3s %-11s %3s %-7s %s \n %-s \n", "||", "ID", "|", "Name","|", "Ocupation", "|", "Departament", "|", "Wages", "||", "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"}
@@ -35,11 +35,11 @@ do
                             END     {print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"}'
                 echo -n ":: "
                 while [ true ]
-            do
-            read answer
-                case $answer in
-                    [yY] | [yY][eE][sS])
-                    ### EDIT MENU ###
+                    do
+                    read answer
+                        case $answer in
+                            [yY] | [yY][eE][sS] | *)
+                            ### EDIT MENU ###
 
 # STOPPED HERE
 
@@ -50,44 +50,54 @@ do
                             echo "||                    Please chose what you want to edit                     ||"
                             echo "==============================================================================="
                             echo "||                                                                           ||"
-                            echo "||  1. id                                                                    ||"
-                            echo "||  2. name                                                                  ||"
-                            echo "||  3. ocupation                                                             ||"
-                            echo "||  4: departament                                                           ||"
-                            echo "||  5: wages                                                                 ||"
+                            echo "||  1. Id                                                                    ||"
+                            echo "||  2. Name                                                                  ||"
+                            echo "||  3. Ocupation                                                             ||"
+                            echo "||  4: Departament                                                           ||"
+                            echo "||  5: Wages                                                                 ||"
+                            echo "||  0: Go back                                                               ||"
                             echo "||                                                                           ||"
                             echo "||  :c To cancel at any moment                                               ||"
                             echo "||                                                                           ||"
                             echo "==============================================================================="
+                            echo -n ":: "
                             read answer
                             case $answer in 
 
                                 1)
-                                echo case1
+                                ./edit.sh $file edit_id $foundLineNumber 
                                 ;;
 
                                 2)
-                                echo case2
+                                ./edit.sh $file edit_name $foundLineNumber 
                                 ;;
 
                                 3)
-                                echo case3
+                                ./edit.sh $file edit_occupation $foundLineNumber 
                                 ;;
 
                                 4)
-                                echo case4
+                                ./edit.sh $file edit_departament $foundLineNumber 
                                 ;;
 
                                 5)
-                                echo case5
+                                ./edit.sh $file edit_wages $foundLineNumber 
                                 ;;
 
                                 0)
-                                echo case0
+                                echo "Go back"
+                                clear
+                                exit 0
+                                ;;
+
+                                :c)
+                                clear
+                                exit 0
                                 ;;
 
                                 *)
-                                echo case\*
+                                clear
+                                echo "*** Invalid input ***"
                                 ;;
                             esac
                         done
@@ -95,31 +105,9 @@ do
                         exit 0
                         ;;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    [nN] | [nN][oO] | *)
+                    [nN] | [nN][oO])
                         clear
-                        echo "***Edit canceled***"
+                        echo "*** Edit canceled ***"
                         echo ""
                         exit 0
                         ;;

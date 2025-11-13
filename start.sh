@@ -12,8 +12,12 @@
 # (( [[ ! ("$1" = "employee.txt") && ! (-f $1) ]] && echo "creating " $1; touch $1;) || 
 # (echo "No parameters entered. Checking if the employee.txt exist"; [[ -f employee.txt ]] && echo "The employee.txt exist. Opening..."; file=employee.txt || echo "The file doesn't exist. Creating a new employee.txt"; touch employee.txt; file=employee.txt))
 
-#clear
-#./menu.sh $1
+clear
+file=$1
+#./edit.sh $file edit_id 8
+./edit.sh $file edit_wages 6
+
+./menu.sh $1
 
 clear
 echo "==============================================================================="
