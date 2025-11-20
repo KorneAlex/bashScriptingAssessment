@@ -14,10 +14,24 @@
 
 clear
 file=$1
-#./edit.sh $file edit_id 8
-./edit.sh $file edit_wages 6
+#echo -e "\033[31mThis text is red\033[0m" # https://labex.io/tutorials/shell-how-to-format-strings-in-bash-scripts-400162
+RED='\033[31m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
+BLUE='\033[34m'
+MAGENTA='\033[35m'
+CYAN='\033[36m'
+## Reset color
+RESET='\033[0m'
+#echo -e "${RED}This text is red${RESET}"
+
+#./edit.sh $file "edit_id" 8
+#./edit.sh $file edit_wages 6
 
 ./menu.sh $1
+
+./find_record.sh employee.txt
+sleep 1000
 
 clear
 echo "==============================================================================="

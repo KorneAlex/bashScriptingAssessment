@@ -40,7 +40,8 @@ case $2 in
                 read answer
                 case $answer in
                     [yY] | [yY][eE][sS])
-                        # TODO: edit here and add the id_exist check
+                        sed -i ''$3's/'$current'/'$new_id'/' $1 # line , old, new
+                        #sed -i 's/'$current'/'$new_id'/g' $1
                         clear
                         echo "***the id has been successfully edited***"
                         # TODO: display result
@@ -84,13 +85,14 @@ case $2 in
             echo "*** Edit canceled ***"
             exit 0
             elif [[ $new_name =~ $abc_check && ${#new_name} -ge 2 && ${#new_name} -le 20 ]]; then # ${#...} - length parameter expancion
+            new_name=`echo $new_name | sed 's/ /_/g'`  # replace ALL spaces with "_"
             echo "Confirm name change $current --> $new_name (y/N)?"
             while [ true ]
                 do
                 read answer
                 case $answer in
                     [yY] | [yY][eE][sS])
-                        # TODO: edit here
+                        sed -i ''$3's/'$current'/'$new_name'/' $1 # line , old, new
                         clear
                         echo "***the name has been successfully edited***"
                         # TODO: display result
@@ -133,13 +135,14 @@ case $2 in
             echo "*** Edit canceled ***"
             exit 0
             elif [[ $new_occupation =~ $abc_check && ${#new_occupation} -ge 2 && ${#new_occupation} -le 20 ]]; then # ${#...} - length parameter expancion
+            new_occupation=`echo $new_occupation | sed 's/ /_/g'`  # replace ALL spaces with "_"
             echo "Confirm occupation change $current --> $new_occupation (y/N)?"
             while [ true ]
                 do
                 read answer
                 case $answer in
                     [yY] | [yY][eE][sS])
-                        # TODO: edit here
+                        sed -i ''$3's/'$current'/'$new_occupation'/' $1 # line , old, new
                         clear
                         echo "***the occupation has been successfully edited***"
                         # TODO: display result
@@ -182,13 +185,14 @@ case $2 in
             echo "*** Edit canceled ***"
             exit 0
             elif [[ $new_departament =~ $abc_check && ${#new_departament} -ge 2 && ${#new_departament} -le 15 ]]; then # ${#...} - length parameter expancion
+            new_departament=`echo $new_departament | sed 's/ /_/g'`  # replace ALL spaces with "_"
             echo "Confirm departament change $current --> $new_departament (y/N)?"
             while [ true ]
                 do
                 read answer
                 case $answer in
                     [yY] | [yY][eE][sS])
-                        # TODO: edit here
+                        sed -i ''$3's/'$current'/'$new_departament'/' $1 # line , old, new
                         clear
                         echo "***the departament has been successfully edited***"
                         # TODO: display result
@@ -230,14 +234,14 @@ case $2 in
             clear
             echo "*** Edit canceled ***"
             exit 0
-            elif [[ $new_wages =~ $number_check && ${#new_wages} -ge 2 && ${#new_wages} -le 15 ]]; then # ${#...} - length parameter expancion
-            echo "Confirm wages change $current --> $new_wages (y/N)?"
+            elif [[ $new_wages =~ $number_check && ${#new_wages} -ge 1 && ${#new_wages} -le 6 ]]; then # ${#...} - length parameter expancion
+            echo "Confirm wages change $current --> €$new_wages (y/N)?"
             while [ true ]
                 do
                 read answer
                 case $answer in
                     [yY] | [yY][eE][sS])
-                        # TODO: edit here
+                        sed -i ''$3's/'$current'/€'$new_wages'/' $1 # line , old, new
                         clear
                         echo "***the wages has been successfully edited***"
                         # TODO: display result

@@ -1,0 +1,11 @@
+30045 frank  manager sales €5000
+40034 caroline developer technology €5500
+10023 mary sysadmin technology €7000
+20012 Rosanne manager marketing €9500
+50056 eamonn dba technology €6000
+60045 colm sysadmin technology €4500
+12334 Alex_Korne 22 22 €22
+88888 ball it_guy it €666
+77777 alex_korne it_guy it €666
+55555 Oleksandr_Korniienko IT_Support_Tech IT_Support €66667
+55555 Oleksandr_Konko IT_Sport_Tech IT_pport €667
