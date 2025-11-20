@@ -7,14 +7,14 @@ file=$1
 while [ true ]
 do
        
-        echo "==============================================================================="
-        echo "||                            Delete record menu                             ||"
-        echo "==============================================================================="
-        echo "||  :c To cancel at any moment                                               ||"
-        echo "||  :l To see the list                                                       ||"
-        echo "||  :? To find the record by name                                            ||"
-        echo "||  Note: id is 5 digits long                                                ||"
-        echo "==============================================================================="
+        echo "============================================================================================="
+        echo "||                            Delete record menu                                           ||"
+        echo "============================================================================================="
+        echo "||  :c To cancel at any moment                                                             ||"
+        echo "||  :l To see the list                                                                     ||"
+        echo "||  :? To find the record by ...                                                           ||"
+        echo "||  Note: id is 5 digits long                                                              ||"
+        echo "============================================================================================="
         echo ""
 echo "Enter the record id you want to delete:"
 echo -n ":: "
@@ -32,9 +32,9 @@ read answer
             echo "Are you sure you want to delete this record(y/N)?"
             echo ""
             sed -n "$foundLineNumber p" $1  | 
-                        awk 'BEGIN  {printf "%s %-5s %3s %-20s %3s %-10s %3s %-11s %3s %-7s %s \n %-s \n", "||", "ID", "|", "Name","|", "Ocupation", "|", "Departament", "|", "Wages", "||", "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"}
-                                {printf "%s %-5s %3s %-20s %3s %-10s %3s %-11s %3s %-7s %s \n", "||", $1, "|", $2,"|", $3,"|", $4,"|", $5, "||"}
-                        END     {print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"}'
+                        awk 'BEGIN  {printf "%s %-5s %3s %-20s %3s %-20s %3s %-15s %3s %-7s %s \n %-s \n", "||", "ID", "|", "Name","|", "Ocupation", "|", "Departament", "|", "Wages", "||", "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"}
+                                {printf "%s %-5s %3s %-20s %3s %-20s %3s %-15s %3s %-7s %s \n", "||", $1, "|", $2,"|", $3,"|", $4,"|", $5, "||"}
+                        END     {print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"}'
             echo -n ":: "
 
 
@@ -58,9 +58,9 @@ read answer
                 esac
             done
             exit 0
-        elif [[ "$answer" = "?" ]] ; then
+        elif [[ "$answer" = ":?" ]] ; then
             clear
-            echo "Sorry, the feature is under development"
+            ./find_record.sh $1 menu
             else 
             clear
             echo -n "The entered id is not found "
