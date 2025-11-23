@@ -97,7 +97,7 @@ do
 
                                 *)
                                 clear
-                                echo "*** Invalid input ***"
+                                echo -e "${RED}*** Invalid input ***${RESET}"
                                 ;;
                             esac
                         done
@@ -114,9 +114,9 @@ do
                 esac
             done
             exit 0
-        elif [[ "$answer" = "?" ]] ; then
+        elif [[ "$answer" = ":?" ]] ; then
             clear
-            echo "Sorry, the feature is under development"
+            ./find_record.sh $1 by_name
             else 
             clear
             echo -n "The entered id is not found "

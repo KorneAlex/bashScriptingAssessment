@@ -7,6 +7,6 @@
 66667 Alex_Korne 22 22 €22
 77777 alex_korne it_guy it €666
 55555 Oleksandr_Korniienko IT_Support_Tech IT_Support €66667
-55556 Oleksandr_Konko IT_Sport_Tech IT_pport €667
 33335 john_smith IT_Sport_Tech IT_pport €667
-55355 john_smith IT_Spoech IT_t €6673
+87878 John_Smith IT_Spoech IT_Departament €8000
+44443 Oleg_Stepanov accountant Acounts €35000

@@ -13,7 +13,12 @@
 # (echo "No parameters entered. Checking if the employee.txt exist"; [[ -f employee.txt ]] && echo "The employee.txt exist. Opening..."; file=employee.txt || echo "The file doesn't exist. Creating a new employee.txt"; touch employee.txt; file=employee.txt))
 
 clear
+if [ $1 ]; then
 file=$1
+else 
+file="employee.txt"
+fi
+
 #echo -e "\033[31mThis text is red\033[0m" # https://labex.io/tutorials/shell-how-to-format-strings-in-bash-scripts-400162
 RED='\033[31m'
 GREEN='\033[32m'
@@ -346,4 +351,4 @@ echo "||                                                                        
 echo "============================================================================================="
 sleep 1
 clear
-./menu.sh $1
+./menu.sh $file

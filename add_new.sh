@@ -5,6 +5,16 @@ re='^[0-9]+$'
 id_check='^[0-9]{5}+$'
 re2='^[0-9]+([.][0-9]+)?$'
 abc_check='^[A-Za-z]+([[:space:]][A-Za-z]+)*$'
+
+RED='\033[31m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
+BLUE='\033[34m'
+MAGENTA='\033[35m'
+CYAN='\033[36m'
+## Reset color
+RESET='\033[0m'
+
         clear
         echo "============================================================================================="
         echo "||                          Enter new record menu                                          ||"
@@ -18,7 +28,7 @@ while [ $count -lt 5 ]
 do 
     if [ $count -eq 0 ]
     then
-        echo -n "Please enter the id (5 digit number): "
+        echo -n -e "Please enter the id (5 digit number): "
         read id
         if [[ "$id" = ":c" ]] ;
         then 
@@ -32,7 +42,7 @@ do
         fi
     elif [ $count -eq 1 ]
     then
-        echo -n "Please enter the employees' full name: "
+        echo -n -e "Please enter the employees' full name: "
         read name
         if [[ "$name" = ":c" ]] ;
         then 
@@ -42,11 +52,11 @@ do
             name=`echo $name | sed 's/ /_/g'`  # replace ALL spaces with "_"
             count=$((count+1))
         else 
-            echo "Error! Warning: Name cannot be blank and must consist of letters a-z"
+            echo -e "${RED}Error! Warning${RESET}: Name cannot be blank and must consist of letters a-z"
         fi
     elif [ $count -eq 2 ]
     then
-        echo -n "Please enter the occupation: "
+        echo -n -e "Please enter the occupation: "
         read occupation
         if [[ "$occupation" = ":c" ]] ;
         then 
@@ -60,7 +70,7 @@ do
         fi
     elif [ $count -eq 3 ]
     then
-        echo -n "Please enter the departament: "
+        echo -n -e "Please enter the departament: "
         read departament
         if [[ "$departament" = ":c" ]] ;
         then 
@@ -73,7 +83,7 @@ do
             echo "Warning: Departament cannot be blank"
         fi
     else
-        echo -n "Please enter the wages (amount in euro): "
+        echo -n -e "Please enter the wages (amount in euro): "
         read wages
         if [[ "$wages" = ":c" ]] ;
         then 

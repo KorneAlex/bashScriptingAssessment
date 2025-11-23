@@ -5,7 +5,7 @@ id_check='^[0-9]{5}+$'
 if ! [[ -z $1 ]] ;
 then
 #echo "parameter entered"
-    if ! [[ -f $1 ]] ; 
+    if ! [[ -f $1 ]] ;
     then
         available_width=$((75 - 4))
         text="Creating $1"
@@ -139,7 +139,7 @@ do
 
     5)
         clear
-        ./find_record.sh $1 menu
+        ./find_record.sh $file menu
     ;;
 
     0)
@@ -149,7 +149,7 @@ echo "                                          ***Bye-bye***"
 
     *)
         clear
-        echo "                               *** Invalid input. Try again ***"
+        echo -e "                               ${RED}*** Invalid input. Try again ***${RESET}"
     ;;
     esac
 done

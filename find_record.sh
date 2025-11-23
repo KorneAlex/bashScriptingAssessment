@@ -4,6 +4,15 @@ file=$1
 id_check='^[0-9]{5}+$'
 abc_check='^[A-Za-z]+([[:space:]|_][A-Za-z]+)*$'
 
+RED='\033[31m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
+BLUE='\033[34m'
+MAGENTA='\033[35m'
+CYAN='\033[36m'
+## Reset color
+RESET='\033[0m'
+
 case $2 in
 
     menu)
@@ -16,10 +25,9 @@ case $2 in
         echo "|| 1. By ID                                                                                ||"
         echo "|| 2. By name                                                                              ||"
         echo "|| 3. By occupation                                                                        ||"
-        echo "|| 4. By depatrament                                                                       ||"
+        echo "|| 4. By departament                                                                       ||"
         echo "|| 0. Go back                                                                              ||"
         echo "||                                                                                         ||"
-        echo "|| :c to cancel at any time                                                                ||"
         echo "============================================================================================="
         echo -n ":: "
         read option
@@ -51,7 +59,7 @@ case $2 in
 
         *)
             clear
-            echo "                        ***invalid input. try again***"
+            echo -e "                               ${RED}*** Invalid input. Try again ***${RESET}"
         ;;
 
         esac
@@ -168,12 +176,12 @@ case $2 in
             if [ $error_counter -ge 3 ];
             then
             clear
-            echo "Error! Warning: Name cannot be blank and must consist of letters a-z x$error_counter"
+            echo -e "${RED}Error! Warning${RESET}: Name cannot be blank and must consist of letters a-z x$error_counter"
             echo "To cancel enter :c"
             elif [ $error_counter -gt 0 ];
             then
             clear
-            echo "Error! Warning: Name cannot be blank and must consist of letters a-z x$error_counter"
+            echo -e "${RED}Error! Warning${RESET}: Name cannot be blank and must consist of letters a-z x$error_counter"
             fi
             echo "============================================================================================="
             echo "||                                  Find record by name                                    ||"
@@ -196,12 +204,12 @@ case $2 in
                 then
                     clear
                     # Here was my version before I asked AI how to do it better: 
-                    # for line in `awk '{ print $2 }' $file | grep -n "" | grep -i $user_input | awk -F: '{print $1}'`;
-                    # do 
-                    # sed -n "$line p" $1 >> .temp_search
-                    # done
+                    for line in `awk '{ print $2 }' $file | grep -n "" | grep -i $user_input | awk -F: '{print $1}'`;
+                    do 
+                    sed -n "$line p" $1 >> .temp_search
+                    done
                     # cat .temp_search
-                    awk -v u="$user_input" '$2 ~ u { print }' "$file" > .temp_search
+                    # awk -v u="$user_input" '$2 ~ u { print }' "$file" > .temp_search # AI version but it is case sensetive so i used mine
                     format="%s %-5s %3s %-20s %3s %-20s %3s %-15s %3s %-7s %s \n %-s \n"
                     echo "============================================================================================="
                     echo "||                                    Found by name                                        ||"
@@ -241,12 +249,12 @@ case $2 in
             if [ $error_counter -ge 3 ];
             then
             clear
-            echo "Error! Warning: Occupation cannot be blank and must consist of letters a-z x$error_counter"
+            echo -e "${RED}Error! Warning${RESET}: Occupation cannot be blank and must consist of letters a-z x$error_counter"
             echo "To cancel enter :c"
             elif [ $error_counter -gt 0 ];
             then
             clear
-            echo "Error! Warning: Occupation cannot be blank and must consist of letters a-z x$error_counter"
+            echo -e "${RED}Error! Warning${RESET}: Occupation cannot be blank and must consist of letters a-z x$error_counter"
             fi
             echo "============================================================================================="
             echo "||                               Find record by occupation                                 ||"
@@ -268,7 +276,11 @@ case $2 in
                 if [ $number_of_lines != 0 ]; 
                 then
                     clear
-                    awk -v u="$user_input" '$3 ~ u { print }' "$file" > .temp_search
+                    for line in `awk '{ print $3 }' $file | grep -n "" | grep -i $user_input | awk -F: '{print $1}'`;
+                    do 
+                    sed -n "$line p" $1 >> .temp_search
+                    done
+                    #awk -v u="$user_input" '$3 ~ u { print }' "$file" > .temp_search
                     format="%s %-5s %3s %-20s %3s %-20s %3s %-15s %3s %-7s %s \n %-s \n"
                     echo "============================================================================================="
                     echo "||                                   Found by occupation                                   ||"
@@ -304,12 +316,12 @@ case $2 in
             if [ $error_counter -ge 3 ];
             then
             clear
-            echo "Error! Warning: Departament cannot be blank and must consist of letters a-z x$error_counter"
+            echo -e "${RED}Error! Warning${RESET}: Departament cannot be blank and must consist of letters a-z x$error_counter"
             echo "To cancel enter :c"
             elif [ $error_counter -gt 0 ];
             then
             clear
-            echo "Error! Warning: Departament cannot be blank and must consist of letters a-z x$error_counter"
+            echo -e "${RED}Error! Warning${RESET}: Departament cannot be blank and must consist of letters a-z x$error_counter"
             fi
             echo "============================================================================================="
             echo "||                               Find record by departament                                ||"
@@ -327,11 +339,16 @@ case $2 in
             elif [[ $user_input =~ $abc_check ]] ; 
             then
                 echo "searching..."
-                number_of_lines=`awk -v u="$user_input" '$4 ~ u { print }' "$file" | wc -l` # how many found
+                ### I changed this because In the video search for "logi" didn't work and it took me 20 min to realise that I should have to search for "technoLOGY :D" Both versions work just fine
+                number_of_lines=`awk '{ print $4 }' $file | grep -i $user_input | wc -l` # how many found 
                 if [ $number_of_lines != 0 ]; 
                 then
                     clear
-                    awk -v u="$user_input" '$4 ~ u { print }' "$file" > .temp_search
+                    for line in `awk '{ print $4 }' $file | grep -n "" | grep -i $user_input | awk -F: '{print $1}'`;
+                    do 
+                    sed -n "$line p" $1 >> .temp_search
+                    done
+                    # awk -v u="$user_input" '$4 ~ u { print }' "$file" > .temp_search
                     format="%s %-5s %3s %-20s %3s %-20s %3s %-15s %3s %-7s %s \n %-s \n"
                     echo "============================================================================================="
                     echo "||                                  Found by departament                                   ||"

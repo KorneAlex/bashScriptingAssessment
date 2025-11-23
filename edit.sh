@@ -265,6 +265,6 @@ case $2 in
 
     *)
     clear
-    echo "*** Invalid input ***"
+    echo -e "${RED}*** Invalid input ***${RESET}"
     ;;
 esac
